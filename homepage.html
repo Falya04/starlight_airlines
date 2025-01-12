@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <style>
+        body {
+            font-family: 'Montserrat', 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #F0F0F0;
+            color: #333;
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            animation: slideIn 1.5s ease-out;
+        }
+
+        .about-section {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .about-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-section img {
+            max-width: 50%;
+            border-radius: 15px;
+        }
+
+        .about-section .text {
+            max-width: 50%;
+        }
+
+        .about-section h2 {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: #0ABAB5;
+        }
+
+        .about-section p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .mission, .values, .history, .progress-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mission h2, .values h2, .history h2, .progress-section h2 {
+            color: #0ABAB5;
+            margin-bottom: 10px;
+        }
+
+        .mission p, .values p, .values ul, .history p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .values ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .values ul li {
+            margin-bottom: 10px;
+        }
+
+        .progress .label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .progress .bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            height: 20px;
+        }
+
+        .progress .fill {
+            height: 100%;
+            background: linear-gradient(90deg, #0ABAB5, #4CAF50);
+            transition: width 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        footer {
+            font-family: 'Arial', sans-serif;
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-content section {
+            margin-bottom: 20px;
+        }
+
+        .footer-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p, .footer-content ul {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .footer-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+
+        .team-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-section h2 {
+            color: #0ABAB5;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .team-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .profile {
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            background-color: white;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .profile h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: #0ABAB5;
+        }
+
+        .profile h3 {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+  	 audio {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <audio id="background-audio" autoplay loop>
+        <source src="audio/homemusic.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+    <div class="container">
+        <div class="about-section">
+            <img src="images/starlight.jpg" alt="Starlight Airlines">
+            <div class="text">
+                <h2>Welcome to Starlight Airlines</h2>
+                <p>With decades of aviation excellence, Starlight Airlines is your trusted partner in air travel. Our commitment to safety, comfort, and sustainability ensures every journey is as exceptional as your destination.</p>
+            </div>
+        </div>
+        <div class="mission">
+            <h2>Our Mission</h2>
+            <p>To connect people and cultures with exceptional service and innovation in aviation. We strive to provide a seamless travel experience that exceeds expectations and inspires joy in every journey.</p>
+        </div>
+        <div class="values">
+            <h2>Our Core Values</h2>
+            <ul>
+                <li><strong>Customer First:</strong> Ensuring comfort and satisfaction in every flight.</li>
+                <li><strong>Safety:</strong> Adhering to the highest standards of safety and reliability.</li>
+                <li><strong>Innovation:</strong> Continuously improving with cutting-edge technology.</li>
+                <li><strong>Sustainability:</strong> Committed to reducing our environmental footprint.</li>
+            </ul>
+        </div>
+        <div class="history">
+            <h2>Our History</h2>
+            <p>Founded in 2004, Starlight Airlines started as a regional carrier and quickly grew to become an international leader in air travel. Over the years, we have expanded our fleet, improved our services, and connected millions of passengers worldwide.</p>
+        </div>
+        <div class="progress-section">
+            <h2>Our Achievements</h2>
+            <div class="progress">
+                <div class="label">
+                    <span>Safety Standards</span>
+                    <span>100%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 100%;"></div>
+                </div>
+            </div>
+            <div class="progress">
+                <div class="label">
+                    <span>Customer Satisfaction</span>
+                    <span>98%</span>
+                </div>
+                <div class="bar">
+                    <div class="fill" style="width: 98%;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="team-section">
+            <h2>Meet Our Team</h2>
+            <div class="team-container">
+                <div class="profile">
+                    <img src="images/falya.jpg" alt="Farah 'Alya">
+                    <h2>FARAH 'ALYA BINTI ABD AZIZ</h2>
+                    <h3>Chief Executive Officer</h3>
+                </div>
+
+                <div class="profile">
+                    <img src="images/aina.jpg" alt="Nur Aina Natashah">
+                    <h2>NUR AINA NATASHAH BINTI MOHD ZAIDI</h2>
+                    <h3>Chief Financial Officer</h3>
+                </div>
+
+                <div class="profile">
+                    <img src="images/amalina.jpg" alt="Amalina">
+                    <h2>NUR AMALINA BINTI ABDULLAH</h2>
+                    <h3>Senior Director</h3>
+                </div>
+
+                <div class="profile">
+                    <img src="images/syafiqah.jpg" alt="Syafiqah Hazric">
+                    <h2>SYAFIQAH BINTI HAZRIC</h2>
+                    <h3>Director of Flight Operations</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <section class="disclaimer">
+                <h3>Disclaimer</h3>
+                <p>
+                    The information provided on this website is for educational purposes only. Starlight Airlines makes no representations or
+                    warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or
+                    the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is
+                    therefore strictly at your own risk.
+                </p>
+            </section>
+            <section class="copyright">
+                <p>&copy; 2024 Starlight Airlines. All rights reserved.</p>
+                <p>
+                    Created: December 21, 2024<br>
+                    Last Updated: <span id="last-updated"></span><br>
+                    Data Collection: Ongoing
+                </p>
+            </section>
+        </div>
+    </footer>
+
+    <script>
+        const lastUpdated = new Date().toLocaleString();
+        const lastUpdatedElement = document.getElementById("last-updated");
+        if (lastUpdatedElement) {
+            lastUpdatedElement.textContent = lastUpdated;
+        }
+    </script>
+</body>
+</html>

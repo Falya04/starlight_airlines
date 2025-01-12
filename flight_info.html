@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Flight Information</title>
+    <style>
+        body {
+            background-color: #F0F0F0;
+            color: #000000;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1, h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0ABAB5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        table, th, td {
+            border: 1px solid #dddddd;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+        thead {
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+        p, ul {
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        strong {
+            font-weight: 600;
+        }
+        footer {
+            font-family: 'Arial', sans-serif;
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .footer-content section {
+            margin-bottom: 20px;
+        }
+        .footer-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .footer-content p, .footer-content ul {
+            font-size: 1em;
+            margin: 0;
+        }
+        .footer-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="section">
+        <h2 id="FlightSchedule">Flight Schedule</h2>
+        <p>Check out the latest flight schedules for Starlight Airlines. Find your departure and arrival times quickly!</p>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Departure</th>
+                    <th>Arrival</th>
+                    <th>Origin</th>
+                    <th>Destination</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SL100</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Penang (PEN)</td>
+                    <td>KLIA</td>
+                    <td>Penang International</td>
+                    <td>07:30</td>
+                    <td>08:30</td>
+                </tr>
+                <tr>
+                    <td>SL101</td>
+                    <td>Penang (PEN)</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Penang International</td>
+                    <td>KLIA</td>
+                    <td>09:00</td>
+                    <td>10:00</td>
+                </tr>
+                <tr>
+                    <td>SL200</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Kota Kinabalu (BKI)</td>
+                    <td>KLIA</td>
+                    <td>Kota Kinabalu</td>
+                    <td>08:00</td>
+                    <td>10:30</td>
+                </tr>
+                <tr>
+                    <td>SL201</td>
+                    <td>Kota Kinabalu (BKI)</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Kota Kinabalu</td>
+                    <td>KLIA</td>
+                    <td>11:00</td>
+                    <td>13:30</td>
+                </tr>
+                <tr>
+                    <td>SL300</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Langkawi (LGK)</td>
+                    <td>KLIA</td>
+                    <td>Langkawi International</td>
+                    <td>10:00</td>
+                    <td>11:10</td>
+                </tr>
+                <tr>
+                    <td>SL301</td>
+                    <td>Langkawi (LGK)</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Langkawi International</td>
+                    <td>KLIA</td>
+                    <td>12:00</td>
+                    <td>13:10</td>
+                </tr>
+                <tr>
+                    <td>SL400</td>
+                    <td>Johor Bahru (JHB)</td>
+                    <td>Kuching (KCH)</td>
+                    <td>Senai International</td>
+                    <td>Kuching International</td>
+                    <td>07:45</td>
+                    <td>09:45</td>
+                </tr>
+                <tr>
+                    <td>SL401</td>
+                    <td>Kuching (KCH)</td>
+                    <td>Johor Bahru (JHB)</td>
+                    <td>Kuching International</td>
+                    <td>Senai International</td>
+                    <td>10:15</td>
+                    <td>12:15</td>
+                </tr>
+                <tr>
+                    <td>SL500</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Melaka (MKZ)</td>
+                    <td>KLIA</td>
+                    <td>Melaka International</td>
+                    <td>08:45</td>
+                    <td>09:30</td>
+                </tr>
+                <tr>
+                    <td>SL501</td>
+                    <td>Melaka (MKZ)</td>
+                    <td>Kuala Lumpur (KUL)</td>
+                    <td>Melaka International</td>
+                    <td>KLIA</td>
+                    <td>10:15</td>
+                    <td>11:00</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2 id="FlightStatus">Flight Status</h2>
+        <p>Stay updated with the latest status of your flight in real-time!</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Flight Number</th>
+                    <th>Route</th>
+                    <th>Scheduled Departure</th>
+                    <th>Scheduled Arrival</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>SL100</td>
+                    <td>Kuala Lumpur (KUL) → Penang (PEN)</td>
+                    <td>07:30</td>
+                    <td>08:30</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Boarding at Gate A12</td>
+                </tr>
+                <tr>
+                    <td>SL101</td>
+                    <td>Penang (PEN) → Kuala Lumpur (KUL)</td>
+                    <td>09:00</td>
+                    <td>10:00</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Gate will open at 08:30</td>
+                </tr>
+                <tr>
+                    <td>SL200</td>
+                    <td>Kuala Lumpur (KUL) → Kota Kinabalu (BKI)</td>
+                    <td>08:00</td>
+                    <td>10:30</td>
+                    <td style="color: orange;">Delayed</td>
+                    <td>New departure time: 08:30</td>
+                </tr>
+                <tr>
+                    <td>SL201</td>
+                    <td>Kota Kinabalu (BKI) → Kuala Lumpur (KUL)</td>
+                    <td>11:00</td>
+                    <td>13:30</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Boarding in 20 minutes</td>
+                </tr>
+                <tr>
+                    <td>SL300</td>
+                    <td>Kuala Lumpur (KUL) → Langkawi (LGK)</td>
+                    <td>10:00</td>
+                    <td>11:10</td>
+                    <td style="color: red;">Cancelled</td>
+                    <td>Please contact customer support</td>
+                </tr>
+                <tr>
+                    <td>SL301</td>
+                    <td>Langkawi (LGK) → Kuala Lumpur (KUL)</td>
+                    <td>12:00</td>
+                    <td>13:10</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Check-in open at counter B3</td>
+                </tr>
+                <tr>
+                    <td>SL400</td>
+                    <td>Johor Bahru (JHB) → Kuching (KCH)</td>
+                    <td>07:45</td>
+                    <td>09:45</td>
+                    <td style="color: orange;">Delayed</td>
+                    <td>New departure time: 08:15</td>
+                </tr>
+                <tr>
+                    <td>SL401</td>
+                    <td>Kuching (KCH) → Johor Bahru (JHB)</td>
+                    <td>10:15</td>
+                    <td>12:15</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Gate B4</td>
+                </tr>
+                <tr>
+                    <td>SL500</td>
+                    <td>Kuala Lumpur (KUL) → Melaka (MKZ)</td>
+                    <td>08:45</td>
+                    <td>09:30</td>
+                    <td style="color: green;">On Time</td>
+                    <td>Gate C2</td>
+                </tr>
+                <tr>
+                    <td>SL501</td>
+                    <td>Melaka (MKZ) → Kuala Lumpur (KUL)</td>
+                    <td>10:15</td>
+                    <td>11:00</td>
+                    <td style="color: orange;">Delayed</td>
+                    <td>New departure time: 10:45</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2 id="BaggagePolicies">Baggage Policies</h2>
+        <p><strong>Carry-On Baggage:</strong></p>
+        <ul>
+            <li>Allowance: One carry-on bag and one personal item.</li>
+            <li>Weight Limit: 7 kg (15 lbs).</li>
+            <li>Dimensions: Maximum size of 56 x 36 x 23 cm (22 x 14 x 9 inches).</li>
+        </ul>
+        <p><strong>Checked Baggage:</strong></p>
+        <ul>
+            <li><strong>Economy Class:</strong> 1 piece, 23 kg (50 lbs), dimensions must not exceed 158 cm (62 inches).</li>
+            <li><strong>Business Class:</strong> 2 pieces, 32 kg (70 lbs) per bag, same dimensions as Economy.</li>
+            <li><strong>Excess Baggage Fees:</strong> Additional charges apply for extra or overweight bags.</li>
+        </ul>
+        <p><strong>Special Items:</strong></p>
+        <ul>
+            <li>Sports Equipment: Allowed with extra fees if exceeding limits.</li>
+            <li>Musical Instruments: Small instruments allowed in carry-on; larger instruments must be checked.</li>
+            <li>Strollers and Baby Items: Complimentary check-in for strollers and car seats.</li>
+        </ul>
+        <p><strong>Prohibited Items:</strong></p>
+        <ul>
+            <li>Flammable items, sharp objects, firearms and weapons and chemical and toxic substances are not allowed.</li>
+        </ul>
+        <p><strong>Tips for Passengers:</strong></p>
+        <ul>
+            <li>Arrive at the airport early for baggage check-in.</li>
+            <li>Clearly label your bags with contact information.</li>
+            <li>Drink plenty of water before flight to prevent yourself from dehydration.</li>
+			<li>Stay calm to comfort yourself by adjusting your seat for good posture, move regularly such as stretch your body and stay entertained by reading a book or watching download movies. 
+			<li>Double check all of the belongings items after landing.</li>
+        </ul>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <section class="disclaimer">
+            <h3>Disclaimer</h3>
+            <p>
+                The information provided on this website is for educational purposes only. Starlight Airlines makes no representations or
+                warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or
+                the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is
+                therefore strictly at your own risk.
+            </p>
+        </section>
+        <section class="copyright">
+            <p>&copy; 2024 Starlight Airlines. All rights reserved.</p>
+            <p>
+                Created: December 21, 2024<br>
+                Last Updated: <span id="last-updated"></span><br>
+                Data Collection: Ongoing
+            </p>
+        </section>
+    </div>
+</footer>
+
+<script>
+    const lastUpdated = new Date().toLocaleString();
+    const lastUpdatedElement = document.getElementById("last-updated");
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = lastUpdated;
+    }
+</script>
+
+</body>
+</html>

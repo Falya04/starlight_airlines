@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('images/paymentbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .payment-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0ABAB5;
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background-color: #FFFFFF;
+            z-index: 1;
+            padding: 20px 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="number"], input[type="email"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-top: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="number"]:focus, input[type="email"]:focus {
+            border-color: #0ABAB5;
+            box-shadow: 0 0 8px rgba(10, 186, 181, 0.3);
+        }
+
+        button {
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            font-size: 1.2em;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        button:hover {
+            background-color: #008C8C;
+            transform: scale(1.05);
+        }
+
+        #total-price {
+            text-align: center;
+            font-size: 1.5em;
+            color: #0ABAB5;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        .notification {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #DFF2BF;
+            color: #4F8A10;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            transition: top 0.5s ease;
+            z-index: 10;
+            width: 80%;
+            max-width: 500px;
+        }
+
+        .notification.error {
+            background-color: #FFBABA;
+            color: #D8000C;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .payment-container {
+                width: 90%;
+                padding: 25px;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="payment-container">
+    <h1>Payment</h1>
+
+    <form id="payment-form">
+        <div class="form-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card_number" placeholder="Enter your card number" maxlength="19" required>
+        </div>
+
+        <div class="form-group">
+            <label for="card-name">Cardholder Name</label>
+            <input type="text" id="card-name" name="card_name" placeholder="Enter cardholder name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="expiry-date">Expiry Date</label>
+            <input type="text" id="expiry-date" name="expiry_date" placeholder="MM/YY" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input type="text" id="cvv" name="cvv" placeholder="CVV" maxlength="3" required>
+        </div>
+
+        <div id="total-price">Total Price: RM0.00</div>
+
+        <button type="button" onclick="processPayment()">Confirm Payment</button>
+    </form>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <a href="homepage.html" style="background-color: #0ABAB5; color: white; text-decoration: none; padding: 12px 25px; border-radius: 8px; font-size: 1.1em; transition: background-color 0.3s ease;">Back to Homepage</a>
+    </div>
+</div>
+
+<div id="notification" class="notification"></div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const totalPrice = localStorage.getItem('totalPrice');
+        if (totalPrice) {
+            document.getElementById('total-price').textContent = totalPrice;
+        }
+    });
+
+    function showNotification(message, isError = false) {
+        const notification = document.getElementById('notification');
+        notification.textContent = message;
+        notification.className = `notification${isError ? ' error' : ''}`;
+        notification.style.top = '20px';
+
+        setTimeout(() => {
+            notification.style.top = '-100px';
+        }, 3000);
+    }
+
+    function processPayment() {
+        const cardNumber = document.getElementById('card-number').value;
+        const cardName = document.getElementById('card-name').value;
+        const expiryDate = document.getElementById('expiry-date').value;
+        const cvv = document.getElementById('cvv').value;
+
+        if (!cardNumber || !cardName || !expiryDate || !cvv) {
+            showNotification('Please fill in all the fields.', true);
+            return;
+        }
+
+        setTimeout(() => {
+            document.getElementById('payment-form').reset();
+            showNotification('Payment Successful! Thank you for booking with us.');
+        }, 1000);
+    }
+
+    document.getElementById('expiry-date').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/[^0-9]/g, '');
+        if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+        }
+        e.target.value = value.substring(0, 5);
+    });
+
+    document.getElementById('card-number').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        value = value.substring(0, 16); 
+        let formattedValue = '';
+        for (let i = 0; i < value.length; i += 4) {
+            if (i > 0) {
+                formattedValue += ' ';
+            }
+            formattedValue += value.substring(i, i + 4);
+        }
+        e.target.value = formattedValue;
+    });
+
+    document.getElementById('card-name').addEventListener('input', function (e) {
+        e.target.value = e.target.value.toUpperCase();
+    });
+
+    document.getElementById('cvv').addEventListener('input', function (e) {
+        e.target.value = e.target.value.substring(0, 3);
+    });
+</script>
+
+</body>
+</html>

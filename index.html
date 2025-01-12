@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Starlight Airlines</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0ABAB5;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #0ABAB5;
+            padding: 10px 15px;
+            width: 100%;
+        }
+
+        .navbar > div {
+            position: relative;
+        }
+
+        .navbar a {
+            color: #FFFFFF;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 13px;
+            transition: color 0.3s ease, transform 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .navbar a:hover {
+            color: #0ABAB5;
+            text-decoration: underline;
+            transform: scale(1.1);
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            z-index: 1000;
+        }
+
+        .dropdown-content a {
+            color: #0ABAB5;
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            font-size: 13px;
+            font-weight: normal;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+        }
+
+        .navbar div:hover .dropdown-content {
+            display: block;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            margin-top: 0;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+    </style>
+
+<link rel="icon" href="images/logo.png" type="image/png">
+</head>
+<body>
+
+<div class="navbar">
+    <a href="homepage.html" target="content-frame">Home</a>
+    <a href="deals.html" target="content-frame">Deals</a>
+
+    <div>
+        <a href="flight_info.html" target="content-frame">Flight Information</a>
+        <div class="dropdown-content">
+            <a href="flight_info.html#FlightSchedule" target="content-frame">Flight Schedule</a>
+            <a href="flight_info.html#FlightStatus" target="content-frame">Flight Status</a>
+            <a href="flight_info.html#BaggagePolicies" target="content-frame">Baggage Policies</a>
+        </div>
+    </div>
+
+    <div>
+        <a href="services.html" target="content-frame">Services</a>
+        <div class="dropdown-content">
+            <a href="services.html#EconomyClass" target="content-frame">Economy Class</a>
+            <a href="services.html#BusinessClass" target="content-frame">Business Class</a>
+            <a href="services.html#Comparison" target="content-frame">Comparison</a>
+        </div>
+    </div>
+
+    <a href="login.html" target="content-frame">Booking</a>
+    <a href="support.html" target="content-frame">Support</a>
+    <a href="contact.html" target="content-frame">Contact</a>
+</div>
+
+<iframe name="content-frame" src="homepage.html"></iframe>
+
+</body>
+</html>

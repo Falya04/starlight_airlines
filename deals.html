@@ -1,0 +1,362 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Starlight Airlines</title>
+  <style>
+    body {
+      font-family: 'Montserrat', 'Open Sans', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #F0F0F0;
+      color: #333;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      color: #0ABAB5 !important;
+      text-align: center;
+    }
+
+    .deals-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 25px;
+      background: white;
+    }
+
+    .deal-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      background-color: #fff;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .deal-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .deal-card .logo {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .deal-card .logo img {
+      height: 20px;
+      margin-right: 8px;
+    }
+
+    .deal-card h3 {
+      margin: 0;
+      font-size: 1.4em;
+      color: #0ABAB5;
+    }
+
+    .deal-card p {
+      margin: 8px 0;
+      color: #555;
+    }
+
+    .price {
+      font-size: 1.8rem;
+      color: #000;
+      margin: 10px 0;
+    }
+
+    .btn {
+      background-color: #0ABAB5;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: center;
+      display: block;
+      margin: 10px auto 0;
+      text-decoration: none;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #007B7F;
+    }
+
+.slider {
+    position: relative;
+    max-width: 700px;
+    margin: auto;
+    overflow: hidden;
+    border: 5px solid #ddd;
+    border-radius: 10px;
+  }
+
+  .slides {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slides img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 35px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    cursor: pointer;
+    z-index: 2;
+    font-size: 24px;
+    color: black;
+  }
+
+  .prev {
+    left: 0;
+  }
+
+  .next {
+    right: 0;
+  }
+
+    .testimonial-section {
+      padding: 40px 20px;
+      background: #f9f9f9;
+    }
+
+    .testimonial-section h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .testimonials {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .testimonial {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      position: relative;
+    }
+
+    .testimonial::before {
+      content: '“';
+      font-size: 3em;
+      color: #0ABAB5;
+      position: absolute;
+      top: -20px;
+      left: 20px;
+      font-family: serif;
+    }
+
+    .testimonial::after {
+      content: '”';
+      font-size: 3em;
+      color: #0ABAB5;
+      position: absolute;
+      bottom: -20px;
+      right: 20px;
+      font-family: serif;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      margin-top: 10px;
+      color: #555;
+      text-align: justify;
+    }
+
+    .testimonial .author {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #0ABAB5;
+      text-align: right;
+    }
+
+    footer {
+      font-family: 'Arial', sans-serif;
+      background-color: #0ABAB5;
+      color: #FFFFFF;
+      padding: 20px;
+      text-align: center;
+      margin-top: 40px;
+      width: 100%;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .footer-content section {
+      margin-bottom: 20px;
+    }
+
+    .footer-content h3 {
+      font-size: 1.5em;
+      margin-bottom: 10px;
+    }
+
+    .footer-content p, .footer-content ul {
+      font-size: 1em;
+      margin: 0;
+    }
+
+    .footer-content ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .footer-content ul li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Exclusive Flight Deals</h2>
+  <div class="deals-container">
+    <div class="deal-card">
+      <div class="logo">
+        <img src="images/logo.png" alt="Starlight Logo">
+        <span>Starlight Airlines</span>
+      </div>
+      <h3>Langkawi (LGK) → Penang (PEN)</h3>
+      <p>Wed, 8 Jan · Direct</p>
+      <p class="price">RM 109.56</p>
+      <button class="btn">Select</button>
+    </div>
+    <div class="deal-card">
+      <div class="logo">
+        <img src="images/logo.png" alt="Starlight Logo">
+        <span>Starlight Airlines</span>
+      </div>
+      <h3>Penang (PEN) → Johor Bahru (JHB)</h3>
+      <p>Tue, 14 Jan · Direct</p>
+      <p class="price">RM 223.28</p>
+      <button class="btn">Select</button>
+    </div>
+    <div class="deal-card">
+      <div class="logo">
+        <img src="images/logo.png" alt="Starlight Logo">
+        <span>Starlight Airlines</span>
+      </div>
+      <h3>Kuala Lumpur (KUL) → Kota Kinabalu (BKI)</h3>
+      <p>Sat, 8 Feb · Direct</p>
+      <p class="price">RM 320</p>
+      <button class="btn">Select</button>
+    </div>
+    <div class="deal-card">
+      <div class="logo">
+        <img src="images/logo.png" alt="Starlight Logo">
+        <span>Starlight Airlines</span>
+      </div>
+      <h3>Alor Setar (AOR) → Kuala Lumpur (KUL)</h3>
+      <p>Fri, 17 Jan · Direct</p>
+      <p class="price">RM 100</p>
+      <button class="btn">Select</button>
+    </div>
+  </div>
+
+<h1 style="text-align:center;">Promotion</h1>
+
+<div class="slider">
+  <div class="slides">
+    <img src="images/flightticket.png" alt="Image 1">
+    <img src="images/eidpromo.png" alt="Image 2">
+    <img src="images/depromo.png" alt="Image 3">
+  </div>
+
+  <button class="nav-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+  <button class="nav-btn next" onclick="moveSlide(1)">&#10095;</button>
+</div>
+
+<script>
+  let currentSlide = 0;
+  
+  function moveSlide(direction) {
+    const slides = document.querySelector('.slides');
+    const totalSlides = slides.children.length;
+    currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+    slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+  }
+</script>
+
+  <div class="testimonial-section">
+    <h2>What Our Customers Say</h2>
+    <div class="testimonials">
+      <div class="testimonial">
+        <p>"Starlight Airlines gave me the most comfortable journey I've ever had! Highly recommended."</p>
+        <div class="author">- Syafiqah Hazric</div>
+      </div>
+      <div class="testimonial">
+        <p>"Incredible service and great deals. I always choose Starlight for my travels."</p>
+        <div class="author">- Aina Natashah</div>
+      </div>
+      <div class="testimonial">
+        <p>"Affordable luxury at its best. Thank you, Starlight Airlines!"</p>
+        <div class="author">- Farah 'Alya</div>
+      </div>
+      <div class="testimonial">
+        <p>"Starlight Airlines turned my usual travel into a delightful experience. Amazing crew and service!"</p>
+        <div class="author">- Nur Amalina</div>
+      </div>
+      <div class="testimonial">
+        <p>"Smooth booking process and excellent customer care. A must-try airline!"</p>
+        <div class="author">- Anonymous</div>
+      </div>
+      <div class="testimonial">
+        <p>"I was skeptical at first, but Starlight Airlines exceeded my expectations. Great value for money."</p>
+        <div class="author">- Anonymous</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-content">
+      <section class="disclaimer">
+        <h3>Disclaimer</h3>
+        <p>
+          The information provided on this website is for educational purposes only. Starlight Airlines makes no representations or
+          warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or
+          the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is
+          therefore strictly at your own risk.
+        </p>
+      </section>
+      <section class="copyright">
+        <p>&copy; 2024 Starlight Airlines. All rights reserved.</p>
+        <p>
+          Created: December 21, 2024<br>
+          Last Updated: <span id="last-updated"></span><br>
+          Data Collection: Ongoing
+        </p>
+      </section>
+    </div>
+  </footer>
+
+  <script>
+    const lastUpdated = new Date().toLocaleString();
+    const lastUpdatedElement = document.getElementById("last-updated");
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = lastUpdated;
+    }
+  </script>
+</body>
+</html>

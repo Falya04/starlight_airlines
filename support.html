@@ -1,0 +1,221 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Customer Support</title>
+    <style>
+        body {
+            background-color: #F0F0F0;
+            color: #333333;
+            font-family: 'Open Sans', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #0ABAB5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .faq-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .faq-section li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            transition: background-color 0.3s ease;
+        }
+        .faq-section li:hover {
+            background-color: #f1f1f1;
+        }
+        .faq-section .question {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-weight: bold;
+            color: #0ABAB5;
+        }
+        .faq-section .question::after {
+            content: '\25BC';
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .faq-section .question.active::after {
+            transform: rotate(180deg);
+        }
+        .faq-section .answer {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #F9F9F9;
+            border-left: 4px solid #0ABAB5;
+        }
+        button {
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background-color: #088e86;
+            transform: translateY(-2px);
+        }
+        footer {
+            font-family: 'Arial', sans-serif;
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+        .footer-content section {
+            margin-bottom: 20px;
+        }
+        .footer-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+        .footer-content p, .footer-content ul {
+            font-size: 1em;
+            margin: 0;
+        }
+        .footer-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section faq-section">
+            <h2>FAQs</h2>
+            <ul>
+                <li>
+                    <div class="question">Q: How can I check my flight status?</div>
+                    <div class="answer">You can visit our "Flight Information" page to check real-time status updates.</div>
+                </li>
+                <li>
+                    <div class="question">Q: Am I allowed to eat outside food and drinks on board?</div>
+                    <div class="answer">Passengers are not allowed to bring and eat outside food and drinks on board.</div>
+                </li>
+                <li>
+                    <div class="question">Q: How can I cancel or change my booking?</div>
+                    <div class="answer">You can contact our support team via phone or email for assist with cancellations or changes.</div>
+                </li>
+                <li>
+                    <div class="question">Q: Are pets allowed on flights?</div>
+                    <div class="answer">Yes, only small pets are allowed in the cabin with the permission.</div>
+                </li>
+                <li>
+                    <div class="question">Q: Can I carry medication on board?</div>
+                    <div class="answer">Yes, you need to declare all medications at the check-in counter and also bring the doctor's letter.</div>
+                </li>
+                <li>
+                    <div class="question">Q: What documents should I provide for my flights?</div>
+                    <div class="answer">Malaysian adults are required to provide their original identity cards for domestic flights.
+                    Malaysian children may be required to provide their original birth certificates before they are allowed to board.</div>
+                </li>
+                <li>
+                    <div class="question">Q: What happens if there is a flight change after I've checked in?</div>
+                    <div class="answer">All passengers need to check the Flight Information as soon as they arrive at their departing terminal for the latest info on their flights such as boarding gate number and scheduled time of departure.</div>
+                </li>
+                <li>
+                    <div class="question">Q: My baggage is too small to be checked in. Can I carry it with me onboard?</div>
+                    <div class="answer">Only one piece of baggage may be hand-carried onboard provided that it does not exceed the dimensions of 54cm x 34cm x 20cm and does not weigh more than 8kg. The piece of hand-carry baggage must fit under the seat in front of you or in an enclosed storage compartment in the cabin.</div>
+                </li>
+                <li>
+                    <div class="question">Q: Is there a limit to the weight of each piece of baggage?</div>
+                    <div class="answer">Regardless of which checked-baggage allowance category you purchase, each piece of checked baggage cannot exceed 34kg in weight.</div>
+                </li>
+                <li>
+                    <div class="question">Q: What is the purpose of the live chat function?</div>
+                    <div class="answer">Live Chat is a new digital customer service platform that facilitates real-time communication with our support team through a chat interface. It provides a convenient means for customers to seek assistance or resolve issues.</div>
+                </li>
+            </ul>
+        </div>
+
+        <script>
+            document.querySelectorAll('.question').forEach((question) => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling;
+                    question.classList.toggle('active');
+                    if (answer.style.display === 'block') {
+                        answer.style.display = 'none';
+                    } else {
+                        answer.style.display = 'block';
+                    }
+                });
+            });
+        </script>
+
+        <div class="section">
+            <h2>Live Chat</h2>
+            <p>Need immediate assistance? Chat with one of our representatives in real time!</p>
+            <button onclick="startChat()">Start Live Chat</button>
+        </div>
+
+        <script>
+            function startChat() {
+                alert('Live chat feature coming soon! Meanwhile, contact us via phone or email.');
+            }
+        </script>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <section class="disclaimer">
+                <h3>Disclaimer</h3>
+                <p>
+                    The information provided on this website is for educational purposes only. Starlight Airlines makes no representations or
+                    warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or
+                    the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is
+                    therefore strictly at your own risk.
+                </p>
+            </section>
+            <section class="copyright">
+                <p>&copy; 2024 Starlight Airlines. All rights reserved.</p>
+                <p>
+                    Created: December 21, 2024<br>
+                    Last Updated: <span id="last-updated"></span><br>
+                    Data Collection: Ongoing
+                </p>
+            </section>
+        </div>
+    </footer>
+
+    <script>
+        const lastUpdated = new Date().toLocaleString();
+        const lastUpdatedElement = document.getElementById("last-updated");
+        if (lastUpdatedElement) {
+            lastUpdatedElement.textContent = lastUpdated;
+        }
+    </script>
+</body>
+</html>

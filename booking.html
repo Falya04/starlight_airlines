@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Flight</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url('images/bookbg.jpg') no-repeat center center fixed;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px);
+            z-index: -1;
+        }
+
+        .booking-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 100%;
+            max-width: 700px;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #0ABAB5;
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 20px;
+            position: sticky;
+            top: 0;
+            background-color: #FFFFFF;
+            z-index: 1;
+            padding: 20px 0;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        input[type="text"], input[type="date"], input[type="number"], button {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1em;
+            margin-top: 8px;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        input[type="text"]:focus, input[type="date"]:focus, input[type="number"]:focus {
+            border-color: #0ABAB5;
+            box-shadow: 0 0 8px rgba(10, 186, 181, 0.3);
+        }
+
+        a.button {
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            font-size: 1.2em;
+            padding: 15px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+        }
+
+        a.button:hover {
+            background-color: #008C8C;
+            transform: scale(1.05);
+        }
+
+        #booking-result {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .back-link a {
+            color: #0ABAB5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link a:hover {
+            color: #008C8C;
+            text-decoration: underline;
+        }
+
+        #error-message {
+            display: none;
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .cabin-class-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+
+        .cabin-class-option {
+            text-align: center;
+        }
+
+        .cabin-class-option img {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .cabin-class-option img:hover,
+        .cabin-class-option img.selected {
+            transform: scale(1.1);
+            border-color: #0ABAB5;
+        }
+
+        .cabin-class-option p {
+            margin-top: 8px;
+            font-size: 1em;
+            color: #333;
+        }
+
+        #total-price {
+            text-align: center;
+            font-size: 1.5em;
+            color: #0ABAB5;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        #total-price a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        #total-price a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .booking-container {
+                width: 90%;
+                padding: 25px;
+            }
+
+            label {
+                font-size: 1em;
+            }
+
+            a.button {
+                font-size: 1em;
+            }
+
+            .cabin-class-option img {
+                width: 100px;
+            }
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 230px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content div {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content div:hover {
+            background-color: #dcdcdc;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        #departure-search:focus + .dropdown-content,
+        #arrival-search:focus + .dropdown-content {
+            display: block;
+        }
+
+        .city-table {
+            display: none;
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .city-table th, .city-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .city-table th {
+            background-color: #f2f2f2;
+        }
+
+        .city-table tr:hover {
+            background-color: #dcdcdc;
+            cursor: pointer;
+        }
+
+    footer {
+            font-family: 'Arial', sans-serif;
+            background-color: #0ABAB5;
+            color: #FFFFFF;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .footer-content section {
+            margin-bottom: 20px;
+        }
+
+        .footer-content h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .footer-content p, .footer-content ul {
+            font-size: 1em;
+            margin: 0;
+        }
+
+        .footer-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-content ul li {
+            margin-bottom: 5px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="booking-container">
+    <h1>Book Flight (One-Way)</h1>
+
+    <form id="booking-form">
+        <div class="form-group">
+            <label for="departure">Departure City</label>
+            <div class="dropdown">
+                <input type="text" id="departure-search" placeholder="Search Departure City" oninput="filterCities('departure')" onclick="showCityTable('departure')">
+                <div id="departure-dropdown" class="dropdown-content"></div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="arrival">Arrival City</label>
+            <div class="dropdown">
+                <input type="text" id="arrival-search" placeholder="Search Arrival City" oninput="filterCities('arrival')" onclick="showCityTable('arrival')">
+                <div id="arrival-dropdown" class="dropdown-content"></div>
+            </div>
+        </div>
+
+        <div id="city-table-container"></div>
+
+        <div class="form-group">
+            <label for="departure-date">Departure Date</label>
+            <input type="date" id="departure-date" name="departure_date" onchange="calculateTotalPrice()">
+        </div>
+
+        <div class="form-group">
+            <label for="adult-count">Number of Adults</label>
+            <input type="number" id="adult-count" name="adult_count" min="1" max="10" value="1" onchange="calculateTotalPrice()">
+        </div>
+
+        <div class="form-group">
+            <label for="children-count">Number of Children</label>
+            <input type="number" id="children-count" name="children_count" min="0" max="10" value="0" onchange="calculateTotalPrice()">
+        </div>
+
+        <div class="form-group">
+            <label for="infant-count">Number of Infants</label>
+            <input type="number" id="infant-count" name="infant_count" min="0" max="10" value="0" onchange="calculateTotalPrice()">
+        </div>
+
+        <div class="form-group">
+            <label for="cabin-class">Cabin Class</label>
+            <div class="cabin-class-container">
+                <div class="cabin-class-option">
+                    <img src="images/economy.jpg" alt="Economy Class" onclick="selectCabinClass('economy')">
+                    <p>Economy Class</p>
+                </div>
+                <div class="cabin-class-option">
+                    <img src="images/business.jpg" alt="Business Class" onclick="selectCabinClass('business')">
+                    <p>Business Class</p>
+                </div>
+            </div>
+            <input type="hidden" id="cabin-class" name="cabin_class">
+        </div>
+
+        <div id="total-price">RM0.00</div>
+
+        <a href="javascript:bookFlight();" id="book-flight-button" class="button">Book Flight</a>
+    </form>
+
+    <div id="booking-result" style="display: none;">
+    <h3>Thank you for your booking!</h3>
+    <p>Your flight request has been successfully submitted. We will contact you shortly with more details.</p>
+    <div class="back-link">
+        <a href="homepage.html">Back to Homepage</a>
+    </div>
+</div>
+
+
+    <div id="error-message" style="display: none; color: red; text-align: center; margin-top: 20px;">
+        <p>Departure city cannot be empty. Please choose a city.</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('departure-date').setAttribute('min', today);
+    });
+
+    const airports = [
+        { name: "Alor Setar", code: "AOR" },
+        { name: "Johor Bahru", code: "JHB" },
+        { name: "Kota Bharu", code: "KBR" },
+        { name: "Kota Kinabalu", code: "BKI" },
+        { name: "Kuala Lumpur", code: "KUL" },
+        { name: "Kuala Terengganu", code: "TGG" },
+        { name: "Kuantan", code: "KUA" },
+        { name: "Kuching", code: "KCH" },
+        { name: "Labuan", code: "LBU" },
+        { name: "Langkawi", code: "LGK" },
+        { name: "Miri", code: "MYY" },
+        { name: "Penang", code: "PEN" },
+        { name: "Sandakan", code: "SDK" },
+        { name: "Sibu", code: "SBW" },
+        { name: "Tawau", code: "TWU" }
+    ];
+
+    const cabinPrices = {
+        economy: 250,
+        business: 750
+    };
+
+    const infantPrices = {
+        economy: 100,
+        business: 250
+    };
+
+    let selectedDepartureCity = "";
+
+    function selectCabinClass(classType) {
+        const images = document.querySelectorAll('.cabin-class-option img');
+        images.forEach(img => img.classList.remove('selected'));
+        const selectedImage = document.querySelector(`img[alt="${classType.charAt(0).toUpperCase() + classType.slice(1)} Class"]`);
+        selectedImage.classList.add('selected'); // Add 'selected' class to the clicked image
+        document.getElementById('cabin-class').value = classType;
+        calculateTotalPrice();
+    }
+
+    function bookFlight() {
+        const departureCity = document.getElementById('departure-search').value;
+        const arrivalCity = document.getElementById('arrival-search').value;
+        const departureDate = document.getElementById('departure-date').value;
+        const cabinClass = document.getElementById('cabin-class').value;
+        const totalPrice = document.getElementById('total-price').textContent;
+
+        if (!departureCity) {
+            document.getElementById('error-message').style.display = 'block';
+            return;
+        }
+
+        localStorage.setItem('departureCity', departureCity);
+        localStorage.setItem('arrivalCity', arrivalCity);
+        localStorage.setItem('departureDate', departureDate);
+        localStorage.setItem('cabinClass', cabinClass);
+        localStorage.setItem('totalPrice', totalPrice);
+
+        window.location.href = 'details.html';
+    }
+
+    function filterCities(inputId) {
+        const input = document.getElementById(inputId + '-search');
+        const filter = input.value.toLowerCase();
+        const dropdown = document.getElementById(inputId + '-dropdown');
+        dropdown.innerHTML = ''; 
+
+        airports.filter(airport => airport.name.toLowerCase().includes(filter)).forEach(airport => {
+            // Exclude the selected departure city from arrival city options
+            if (inputId === 'arrival' && airport.name === selectedDepartureCity) {
+                return; // Skip if it's the selected departure city
+            }
+            const option = document.createElement('div');
+            option.textContent = `${airport.name} (${airport.code})`;
+            option.onclick = () => {
+                input.value = `${airport.name} (${airport.code})`;
+                if (inputId === 'departure') {
+                    selectedDepartureCity = airport.name;
+                }
+                dropdown.innerHTML = '';
+            };
+            dropdown.appendChild(option);
+        });
+    }
+
+    function showCityTable(inputId) {
+        const tableContainer = document.getElementById('city-table-container');
+        tableContainer.innerHTML = '';
+        const table = document.createElement('table');
+        table.className = 'city-table';
+        table.innerHTML = `
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Code</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${airports.map(airport => `
+                <tr onclick="selectCity('${airport.name} (${airport.code})', '${inputId}')">
+                    <td>${airport.name}</td>
+                    <td>${airport.code}</td>
+                </tr>`).join('')}
+            </tbody>
+        `;
+        tableContainer.appendChild(table);
+        table.style.display = 'table';
+    }
+
+    function selectCity(city, inputId) {
+        document.getElementById(inputId + '-search').value = city;
+        if (inputId === 'departure') {
+            selectedDepartureCity = city.split(' (')[0]; // Store only the city name
+        }
+        document.getElementById('city-table-container').innerHTML = ''; 
+    }
+
+    function calculateTotalPrice() {
+        const adults = parseInt(document.getElementById('adult-count').value, 10) || 0;
+        const children = parseInt(document.getElementById('children-count').value, 10) || 0;
+        const infants = parseInt(document.getElementById('infant-count').value, 10) || 0;
+        const departureDate = new Date(document.getElementById('departure-date').value);
+        const today = new Date();
+        const cabinClass = document.getElementById('cabin-class').value;
+
+        const diffTime = Math.abs(departureDate - today);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        const minPrice = 226;
+        const maxPrice = 415;
+
+        const pricePerPerson = minPrice + (maxPrice - minPrice) * (30 - diffDays) / 30;
+
+        const cabinPrice = cabinPrices[cabinClass] || 0;
+
+        const infantPrice = infantPrices[cabinClass] || 0;
+
+        const childPrice = pricePerPerson / 2;
+
+        const totalPrice = (adults * pricePerPerson) + (children * childPrice) + (infants * infantPrice) + cabinPrice;
+
+        document.getElementById('total-price').textContent = `RM${totalPrice.toFixed(2)}`;
+    }
+
+</script>
+
+<footer>
+    <div class="footer-content">
+        <section class="disclaimer">
+            <h3>Disclaimer</h3>
+            <p>
+                The information provided on this website is for educational purposes only. Starlight Airlines makes no representations or
+                warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or
+                the information, products, services, or related graphics contained on the website for any purpose. Any reliance you place on such information is
+                therefore strictly at your own risk.
+            </p>
+        </section>
+        <section class="copyright">
+            <p>&copy; 2024 Starlight Airlines. All rights reserved.</p>
+            <p>
+                Created: December 21, 2024<br>
+                Last Updated: <span id="last-updated"></span><br>
+                Data Collection: Ongoing
+            </p>
+        </section>
+    </div>
+</footer>
+
+<script>
+    const lastUpdated = new Date().toLocaleString();
+    const lastUpdatedElement = document.getElementById("last-updated");
+    if (lastUpdatedElement) {
+        lastUpdatedElement.textContent = lastUpdated;
+    }
+</script>
+
+</body>
+</html> 

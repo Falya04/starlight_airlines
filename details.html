@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            height: auto;
+            margin: 0;
+        }
+
+        .booking-details {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 700px;
+            text-align: center;
+            min-height: 80vh;
+            overflow-y: auto;
+        }
+
+        h1 {
+            color: #0ABAB5;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        strong {
+            color: #0ABAB5;
+        }
+
+        a {
+            display: inline-block;
+            background-color: #0ABAB5;
+            color: #fff;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #008C8C;
+        }
+
+        .form-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], input[type="date"], select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #0ABAB5;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        button:hover {
+            background-color: #008C8C;
+        }
+
+        .add-passenger-btn {
+            background-color: #ff8c00;
+            color: #fff;
+            padding: 10px 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .add-passenger-btn:hover {
+            background-color: #cc7a00;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            .booking-details {
+                padding: 20px;
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-details">
+        <h1>Your Booking Details</h1>
+
+        <p><strong>Departure City:</strong> <span id="departure-city"></span></p>
+        <p><strong>Arrival City:</strong> <span id="arrival-city"></span></p>
+        <p><strong>Departure Date:</strong> <span id="departure-date"></span></p>
+        <p><strong>Cabin Class:</strong> <span id="cabin-class"></span></p>
+        <p><strong>Total Price:</strong> <span id="total-price"></span></p>
+
+        <div class="form-container">
+            <h2>Enter Your Personal Details</h2>
+            <form id="user-details-form">
+                <div id="passenger-fields">
+                    <div class="form-group passenger" id="passenger-1">
+                        <h3>Passenger 1</h3>
+                        <label for="first-name-1">First Name</label>
+                        <input type="text" id="first-name-1" name="first_name" required>
+
+                        <label for="family-name-1">Family Name</label>
+                        <input type="text" id="family-name-1" name="family_name" required>
+
+                        <label for="dob-1">Date of Birth</label>
+                        <input type="date" id="dob-1" name="dob" required>
+
+                        <label for="gender-1">Gender</label>
+                        <select id="gender-1" name="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                        </select>
+
+                        <label for="special-assistance-1">
+                            <input type="checkbox" id="special-assistance-1" name="special_assistance">
+                            I need special assistance
+                        </label>
+
+                        <label for="infant-1">Infant (under 2 years old) travelling with you?</label>
+                        <select id="infant-1" name="infant" required>
+                            <option value="">Select</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit">Submit Details</button>
+            </form>
+
+            <button type="button" class="add-passenger-btn" onclick="addNewPassenger()">Add New Passenger</button>
+        </div>
+
+        <div>
+            <a href="payment.html">Complete Payment</a>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('departure-city').textContent = localStorage.getItem('departureCity');
+        document.getElementById('arrival-city').textContent = localStorage.getItem('arrivalCity');
+        document.getElementById('departure-date').textContent = localStorage.getItem('departureDate');
+        document.getElementById('cabin-class').textContent = localStorage.getItem('cabinClass');
+        document.getElementById('total-price').textContent = localStorage.getItem('totalPrice');
+
+        let passengerCount = 1;
+        function addNewPassenger() {
+            passengerCount++;
+            const newPassengerDiv = document.createElement('div');
+            newPassengerDiv.classList.add('form-group', 'passenger');
+            newPassengerDiv.id = `passenger-${passengerCount}`;
+            newPassengerDiv.innerHTML = `
+                <h3>Passenger ${passengerCount}</h3>
+                <label for="first-name-${passengerCount}">First Name</label>
+                <input type="text" id="first-name-${passengerCount}" name="first_name" required>
+
+                <label for="family-name-${passengerCount}">Family Name</label>
+                <input type="text" id="family-name-${passengerCount}" name="family_name" required>
+
+                <label for="dob-${passengerCount}">Date of Birth</label>
+                <input type="date" id="dob-${passengerCount}" name="dob" required>
+
+                <label for="gender-${passengerCount}">Gender</label>
+                <select id="gender-${passengerCount}" name="gender" required>
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+
+                <label for="special-assistance-${passengerCount}">
+                    <input type="checkbox" id="special-assistance-${passengerCount}" name="special_assistance">
+                    I need special assistance
+                </label>
+
+                <label for="infant-${passengerCount}">Infant (under 2 years old) travelling with you?</label>
+                <select id="infant-${passengerCount}" name="infant" required>
+                    <option value="">Select</option>
+                    <option value="yes">Yes</option>
+                    <option value="no">No</option>
+                </select>
+            `;
+            document.getElementById('passenger-fields').appendChild(newPassengerDiv);
+        }
+
+        document.getElementById('user-details-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const userDetails = [];
+            for (let i = 1; i <= passengerCount; i++) {
+                const firstName = document.getElementById(`first-name-${i}`).value;
+                const familyName = document.getElementById(`family-name-${i}`).value;
+                const dob = document.getElementById(`dob-${i}`).value;
+                const gender = document.getElementById(`gender-${i}`).value;
+                const specialAssistance = document.getElementById(`special-assistance-${i}`).checked;
+                const infant = document.getElementById(`infant-${i}`).value;
+                userDetails.push({ firstName, familyName, dob, gender, specialAssistance, infant });
+            }
+            localStorage.setItem('userDetails', JSON.stringify(userDetails));
+            alert('Details submitted successfully!');
+
+            document.getElementById('user-details-form').reset();
+        });
+    </script>
+</body>
+</html>
